@@ -3,6 +3,9 @@
 -- Use your language server to automatically format your code on save.
 -- Adds additional commands as well to manage the behavior
 
+-- to enable, uncomment the following line
+if true then return {} end
+
 return {
   'neovim/nvim-lspconfig',
   config = function()
