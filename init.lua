@@ -220,6 +220,24 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- Tabs and Spaces
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
+--- Allow toggling between tabs and spaces
+vim.keymap.set("n", "<F12>", function()
+    if vim.opt.expandtab == true then
+        vim.opt.expandtab = false
+        vim.opt.softabstop = 0
+    else
+        vim.opt.expandtab = true
+        vim.opt.softabstop = 4
+    end
+end)
+
+require "options.vimrc"
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
