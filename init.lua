@@ -154,13 +154,16 @@ require('lazy').setup({
     end,
   },
 
-  { -- Highlight, edit, and navigate code
+  { -- Highlight, edit, and navigate code: https://github.com/nvim-treesitter/nvim-treesitter
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ":TSUpdate",
   },
+
+  -- Neovim plugin to browse the file system and other tree like structures in whatever style suits you, including sidebars, floating windows, netrw split style, or all of them at once!
+  -- TODO: Add Neovim Neotree
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -226,6 +229,10 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 --- Allow toggling between tabs and spaces
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
+--- Allow toggling between tabs and spaces
 vim.keymap.set("n", "<F12>", function()
     if vim.opt.expandtab == true then
         vim.opt.expandtab = false
@@ -236,6 +243,7 @@ vim.keymap.set("n", "<F12>", function()
     end
 end)
 
+-- Options
 require "options.vimrc"
 
 -- [[ Basic Keymaps ]]
@@ -297,7 +305,8 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  -- Supported languages can be found here: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+  ensure_installed = { 'sql', 'regex', 'markdown', 'make', 'gitignore', 'git_config', 'dockerfile', 'bash', 'yaml', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
