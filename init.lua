@@ -433,7 +433,7 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-
+  bashls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
