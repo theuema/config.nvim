@@ -13,4 +13,6 @@ vim.cmd([[
   vnoremap <A-k> :m-2<CR>gv=gv
   vnoremap <A-h> <gv
   vnoremap <A-l> >gv
+  " --- Use :bonly to delete every buffer execpt the current 
+  command Bonly silent! execute "%bd|e#|bd#"
 ]])

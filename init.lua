@@ -185,8 +185,10 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
--- Set highlight on search
-vim.o.hlsearch = false
+-- Set highlight on all search results
+vim.o.hlsearch = true
+-- or
+--vim.opt.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -233,7 +235,7 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 --- Allow toggling between tabs and spaces
-vim.keymap.set("n", "<F12>", function()
+vim.keymap.set('n', '<F12>', function()
     if vim.opt.expandtab == true then
         vim.opt.expandtab = false
         vim.opt.softabstop = 0
@@ -247,6 +249,39 @@ end)
 require "options.vimrc"
 
 -- [[ Basic Keymaps ]]
+-- The Lua API has a function to map keys to some functions. The function signature is vim.api.nvim_set_keymap(mode, keys, mapping, options), where mode refers to a letter representing editor mode ( n for normal, i for insert etc.)
+-- just like in original vim functions like nmap or imap, keys is a string representing a combination of keys, mapping is a string representing what the keys map to, and options are a table where you can pass some additional settings.
+
+-- Switch between tabs
+-- Standard: 
+--  next tab: gt
+--  prev tab: gT
+--  num tab: 2gt
+-- Desired remaps:
+--nnoremap <C-Left> :tabprevious<CR>                                                                            
+--nnoremap <C-Right> :tabnext<CR>
+--nnoremap <C-h> :tabprevious<CR>                                                                            
+--nnoremap <C-l> :tabnext<CR>
+vim.keymap.set('n', '<C-Left>', ':tabp<CR>')
+vim.keymap.set('n', '<C-Right>', ':tabn<CR>')
+
+-- Switch between buffers
+vim.keymap.set('n', '<C-Down>', ':bn<CR>')
+vim.keymap.set('n', '<C-Up>', ':bp<CR>')
+vim.keymap.set('n', '<C-S-Up>', ':b#<CR>')
+-- Delete all buffers except the current (command def in vimrc.lua) 
+vim.keymap.set('n', '<leader>bo', ':Bonly<CR>')
+
+-- Switch focus of windows to left and right
+vim.keymap.set('n', '<C-l>', '<C-w>l')
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+
+-- "YankPaste": Paste last yank from register 0, which is not overwritten by a `dd`
+vim.keymap.set('n', '<leader>yp', '"0p')
+
+-- More basic
+vim.keymap.set('n', '<leader>h', ':noh<CR>', { desc = 'Disable search highlighting' })
+vim.keymap.set('n', '<leader>t', ':NvimTreeToggle<CR>', { desc = 'Toggle NvimTree' })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
